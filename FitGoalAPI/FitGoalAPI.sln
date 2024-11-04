@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitGoalAPI", "FitGoalAPI.csproj", "{2DD84B1E-5A60-43C6-A2BE-13D6106D16AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "..\Shared\Shared.csproj", "{75093AC2-362C-45AB-8129-7E14609EF5BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DD84B1E-5A60-43C6-A2BE-13D6106D16AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD84B1E-5A60-43C6-A2BE-13D6106D16AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD84B1E-5A60-43C6-A2BE-13D6106D16AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD84B1E-5A60-43C6-A2BE-13D6106D16AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75093AC2-362C-45AB-8129-7E14609EF5BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75093AC2-362C-45AB-8129-7E14609EF5BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75093AC2-362C-45AB-8129-7E14609EF5BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75093AC2-362C-45AB-8129-7E14609EF5BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1122D824-2175-4091-AE7C-5C1DAAC80E82}
+	EndGlobalSection
+EndGlobal
