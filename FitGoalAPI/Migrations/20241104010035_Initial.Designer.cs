@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitGoalAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241103220940_Initial")]
+    [Migration("20241104010035_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -183,7 +183,7 @@ namespace FitGoalAPI.Migrations
 
                     b.HasKey("TipId");
 
-                    b.ToTable("tips");
+                    b.ToTable("Tips");
                 });
 
             modelBuilder.Entity("Shared.Models.Usuarios", b =>

@@ -180,7 +180,7 @@ namespace FitGoalAPI.Migrations
 
                     b.HasKey("TipId");
 
-                    b.ToTable("tips");
+                    b.ToTable("Tips");
                 });
 
             modelBuilder.Entity("Shared.Models.Usuarios", b =>

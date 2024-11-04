@@ -98,7 +98,7 @@ namespace FitGoalAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "tips",
+                name: "Tips",
                 columns: table => new
                 {
                     TipId = table.Column<int>(type: "int", nullable: false)
@@ -110,7 +110,7 @@ namespace FitGoalAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tips", x => x.TipId);
+                    table.PrimaryKey("PK_Tips", x => x.TipId);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -184,7 +184,7 @@ namespace FitGoalAPI.Migrations
                 name: "RutinaEjercicios");
 
             migrationBuilder.DropTable(
-                name: "tips");
+                name: "Tips");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
