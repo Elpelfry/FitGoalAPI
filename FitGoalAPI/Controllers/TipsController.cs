@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
 using Shared.Abstractions;
+using FitGoalAPI.Authentication;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[ServiceFilter(typeof(ApiKeyAuthFilter))]
 public class TipsController(IGenericService<Tips> _service) : ControllerBase
 {
     // GET: api/Tips

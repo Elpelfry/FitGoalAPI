@@ -1,20 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Models;
 using Shared.Abstractions;
+using FitGoalAPI.Authentication;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[ServiceFilter(typeof(ApiKeyAuthFilter))]
 public class UsuariosController(IUserService<Usuarios> _service) : ControllerBase
 {
-    // GET: api/Usuarios/List/UID
-    [HttpGet("List/{UID}")]
-    public async Task<ActionResult<IEnumerable<Usuarios>>> GetList(string UID)
-    {
-        return await _service.GetListByUID(UID);
-    }
-
     // GET: api/Usuarios/UID
     [HttpGet("{UID}")]
     public async Task<ActionResult<Usuarios>> Get(string UID)
