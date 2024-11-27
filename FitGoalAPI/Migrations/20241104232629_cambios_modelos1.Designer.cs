@@ -4,6 +4,7 @@ using FitGoalAPI.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitGoalAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241104232629_cambios_modelos1")]
+    partial class cambios_modelos1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,28 +76,6 @@ namespace FitGoalAPI.Migrations
                     b.HasKey("EntrenamientoId");
 
                     b.ToTable("Entrenamientos");
-                });
-
-            modelBuilder.Entity("Shared.Models.HorarioBebidas", b =>
-                {
-                    b.Property<int>("HorarioBebidaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("HorarioBebidaId"));
-
-                    b.Property<float>("Cantidad")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Hora")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("HorarioBebidaId");
-
-                    b.ToTable("HorarioBebidas");
                 });
 
             modelBuilder.Entity("Shared.Models.ProgresoUsuarios", b =>

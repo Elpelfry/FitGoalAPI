@@ -4,6 +4,7 @@ using FitGoalAPI.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitGoalAPI.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20241104221303_cambios_modelo")]
+    partial class cambios_modelo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,28 +78,6 @@ namespace FitGoalAPI.Migrations
                     b.ToTable("Entrenamientos");
                 });
 
-            modelBuilder.Entity("Shared.Models.HorarioBebidas", b =>
-                {
-                    b.Property<int>("HorarioBebidaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("HorarioBebidaId"));
-
-                    b.Property<float>("Cantidad")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Hora")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("HorarioBebidaId");
-
-                    b.ToTable("HorarioBebidas");
-                });
-
             modelBuilder.Entity("Shared.Models.ProgresoUsuarios", b =>
                 {
                     b.Property<int>("ProgresoId")
@@ -139,8 +120,8 @@ namespace FitGoalAPI.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("RutinaEjercicioId"));
 
-                    b.Property<int>("Descanso")
-                        .HasColumnType("int");
+                    b.Property<TimeSpan>("Descanso")
+                        .HasColumnType("time(6)");
 
                     b.Property<int>("EjercicioId")
                         .HasColumnType("int");
@@ -172,8 +153,8 @@ namespace FitGoalAPI.Migrations
                     b.Property<string>("Descripcion")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("DuracionTotal")
-                        .HasColumnType("int");
+                    b.Property<TimeSpan>("DuracionTotal")
+                        .HasColumnType("time(6)");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("longtext");

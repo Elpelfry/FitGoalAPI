@@ -12,6 +12,6 @@ public class Entrenamientos
     [ForeignKey("Rutinas")]
     public int RutinaId { get; set; }
     public DateTime Fecha { get; set; }
-    public TimeSpan DuracionTotal { get; set; }
+    public int DuracionTotal { get; set; }
     public string? Estado { get; set; }
 }
