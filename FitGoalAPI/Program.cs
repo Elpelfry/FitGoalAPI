@@ -50,6 +50,7 @@ builder.Services.AddScoped<IUserService<ProgresoUsuarios>, ProgresoUsuariosServi
 builder.Services.AddScoped<IUserService<Rutinas>, RutinasService>();
 builder.Services.AddScoped<IGenericService<Ejercicios>, EjerciciosService>();
 builder.Services.AddScoped<IGenericService<Tips>, TipsService>();
+builder.Services.AddScoped<IUserService<HorarioBebidas>, HorarioBebidasService>();
 
 builder.Services.AddScoped<ApiKeyAuthFilter>();
 

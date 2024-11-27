@@ -14,4 +14,5 @@ public class Context : DbContext
     public DbSet<Entrenamientos> Entrenamientos { get; set; }
     public DbSet<ProgresoUsuarios> ProgresoUsuarios { get; set; }
     public DbSet<Tips> Tips { get; set; }
+    public DbSet<HorarioBebidas> HorarioBebidas { get; set; }
 }
