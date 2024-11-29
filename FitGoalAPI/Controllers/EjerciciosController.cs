@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using Shared.Abstractions;
 using FitGoalAPI.Authentication;
+using Abstractions;
+using Domain.DTO;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class EjerciciosController(IGenericService<Ejercicios> _service) : ControllerBase
+public class EjerciciosController(IEjercicioService _service) : ControllerBase
 {
     // GET: api/Ejercicios
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Ejercicios>>> GetAll()
+    public async Task<ActionResult<IEnumerable<EjerciciosDto>>> GetAll()
     {
         return await _service.GetAll();
     }
 
     // GET: api/Ejercicios/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Ejercicios>> Get(int id)
+    public async Task<ActionResult<EjerciciosDto>> Get(int id)
     {
         var ejercicio = await _service.Get(id);
 
@@ -33,7 +33,7 @@ public class EjerciciosController(IGenericService<Ejercicios> _service) : Contro
 
     // POST: api/Ejercicios
     [HttpPost]
-    public async Task<ActionResult<Ejercicios>> Add(Ejercicios ejercicio)
+    public async Task<ActionResult<EjerciciosDto>> Add(EjerciciosDto ejercicio)
     {
         var newejercicio = await _service.Add(ejercicio);
         return CreatedAtAction(nameof(Get), new { id = newejercicio.EjercicioId }, newejercicio);
@@ -41,7 +41,7 @@ public class EjerciciosController(IGenericService<Ejercicios> _service) : Contro
 
     // PUT: api/Ejercicios/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Ejercicios ejercicios)
+    public async Task<IActionResult> Update(int id, EjerciciosDto ejercicios)
     {
         if (id != ejercicios.EjercicioId)
         {

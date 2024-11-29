@@ -1,29 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using Shared.Abstractions;
 using FitGoalAPI.Authentication;
+using Abstractions;
+using Domain.DTO;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class RutinasController(IUserService<Rutinas> _service) : ControllerBase
+public class RutinasController(IRutinaService _service) : ControllerBase
 {
     // GET: api/Rutinas/List/ID
     [HttpGet("List/{id}")]
-    public async Task<ActionResult<IEnumerable<Rutinas>>> GetList(string id)
+    public async Task<ActionResult<IEnumerable<RutinasDto>>> GetList(string id)
     {
         return await _service.GetListByUID(id);
     }
 
     // GET: api/Rutinas/ID
     [HttpGet("{id}")]
-    public async Task<ActionResult<Rutinas>> Get(string id)
+    public async Task<ActionResult<RutinasDto>> Get(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
         var ejercicio = await _service.Get(id);
 
         if (ejercicio == null)
@@ -34,7 +31,7 @@ public class RutinasController(IUserService<Rutinas> _service) : ControllerBase
 
     // POST: api/Rutinas
     [HttpPost]
-    public async Task<ActionResult<Rutinas>> Add(Rutinas rutina)
+    public async Task<ActionResult<RutinasDto>> Add(RutinasDto rutina)
     {
         var newrutina = await _service.Add(rutina);
         return CreatedAtAction(nameof(Get), new { id = newrutina.RutinaId }, newrutina);
@@ -42,12 +39,9 @@ public class RutinasController(IUserService<Rutinas> _service) : ControllerBase
 
     // PUT: api/Rutinas/ID
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, Rutinas rutina)
+    public async Task<IActionResult> Update(int id, RutinasDto rutina)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        if (result != rutina.RutinaId)
+        if (id != rutina.RutinaId)
         {
             return BadRequest();
         }
@@ -57,13 +51,10 @@ public class RutinasController(IUserService<Rutinas> _service) : ControllerBase
 
     // DELETE: api/Rutinas/ID
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        var results = await _service.Delete(id);
-        if (!results)
+        var result = await _service.Delete(id);
+        if (!result)
         {
             return NotFound();
         }

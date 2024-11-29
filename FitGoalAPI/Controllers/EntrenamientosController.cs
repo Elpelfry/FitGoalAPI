@@ -1,29 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using Shared.Abstractions;
 using FitGoalAPI.Authentication;
+using Abstractions;
+using Domain.DTO;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class EntrenamientosController(IUserService<Entrenamientos> _service) : ControllerBase
+public class EntrenamientosController(IEntrenamientoService _service) : ControllerBase
 {
     // GET: api/Entrenamientos/List/ID
     [HttpGet("List/{id}")]
-    public async Task<ActionResult<IEnumerable<Entrenamientos>>> GetList(string id)
+    public async Task<ActionResult<IEnumerable<EntrenamientosDto>>> GetList(string id)
     {
         return await _service.GetListByUID(id);
     }
 
     // GET: api/Entrenamientos/ID
     [HttpGet("{id}")]
-    public async Task<ActionResult<Entrenamientos>> Get(string id)
+    public async Task<ActionResult<EntrenamientosDto>> Get(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
         var entrenamiento = await _service.Get(id);
 
         if (entrenamiento == null)
@@ -34,7 +31,7 @@ public class EntrenamientosController(IUserService<Entrenamientos> _service) : C
 
     // POST: api/Entrenamientos
     [HttpPost]
-    public async Task<ActionResult<Entrenamientos>> Add(Entrenamientos entrenamiento)
+    public async Task<ActionResult<EntrenamientosDto>> Add(EntrenamientosDto entrenamiento)
     {
         var newEntrenamiento = await _service.Add(entrenamiento);
         return CreatedAtAction(nameof(Get), new { id = newEntrenamiento.EntrenamientoId }, newEntrenamiento);
@@ -42,12 +39,9 @@ public class EntrenamientosController(IUserService<Entrenamientos> _service) : C
 
     // PUT: api/Entrenamientos/ID
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, Entrenamientos entrenamiento)
+    public async Task<IActionResult> Update(int id, EntrenamientosDto entrenamiento)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        if (result != entrenamiento.EntrenamientoId)
+        if (id != entrenamiento.EntrenamientoId)
         {
             return BadRequest();
         }
@@ -57,13 +51,10 @@ public class EntrenamientosController(IUserService<Entrenamientos> _service) : C
 
     // DELETE: api/Entrenamientos/ID
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        var results = await _service.Delete(id);
-        if (!results)
+        var result = await _service.Delete(id);
+        if (!result)
         {
             return NotFound();
         }

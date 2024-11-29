@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using Shared.Abstractions;
 using FitGoalAPI.Authentication;
+using Abstractions;
+using Domain.DTO;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class TipsController(IGenericService<Tips> _service) : ControllerBase
+public class TipsController(ITipService _service) : ControllerBase
 {
     // GET: api/Tips
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Tips>>> GetAll()
+    public async Task<ActionResult<IEnumerable<TipsDto>>> GetAll()
     {
         return await _service.GetAll();
     }
 
     // GET: api/Tips/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Tips>> Get(int id)
+    public async Task<ActionResult<TipsDto>> Get(int id)
     {
         var tip = await _service.Get(id);
         if (tip == null)
@@ -30,7 +30,7 @@ public class TipsController(IGenericService<Tips> _service) : ControllerBase
 
     // POST: api/Tips
     [HttpPost]
-    public async Task<ActionResult<Tips>> Add(Tips tip)
+    public async Task<ActionResult<TipsDto>> Add(TipsDto tip)
     {
         var newTip = await _service.Add(tip);
         return CreatedAtAction(nameof(Get), new { id = newTip.TipId }, newTip);
@@ -38,7 +38,7 @@ public class TipsController(IGenericService<Tips> _service) : ControllerBase
 
     // PUT: api/Tips/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, Tips tip)
+    public async Task<IActionResult> Update(int id, TipsDto tip)
     {
         if (id != tip.TipId)
             return BadRequest();

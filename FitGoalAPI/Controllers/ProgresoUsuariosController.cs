@@ -1,29 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using Shared.Abstractions;
 using FitGoalAPI.Authentication;
+using Abstractions;
+using Domain.DTO;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class ProgresoUsuariosController(IUserService<ProgresoUsuarios> _service) : ControllerBase
+public class ProgresoUsuariosController(IProgresoUsuarioService _service) : ControllerBase
 {
     // GET: api/ProgresoUsuarios/List/ID
     [HttpGet("List/{id}")]
-    public async Task<ActionResult<IEnumerable<ProgresoUsuarios>>> GetList(string id)
+    public async Task<ActionResult<IEnumerable<ProgresoUsuariosDto>>> GetList(string id)
     {
         return await _service.GetListByUID(id);
     }
 
     // GET: api/ProgresoUsuarios/ID
     [HttpGet("{id}")]
-    public async Task<ActionResult<ProgresoUsuarios>> Get(string id)
+    public async Task<ActionResult<ProgresoUsuariosDto>> Get(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
         var progreso = await _service.Get(id);
 
         if (progreso == null)
@@ -34,7 +31,7 @@ public class ProgresoUsuariosController(IUserService<ProgresoUsuarios> _service)
 
     // POST: api/ProgresoUsuarios
     [HttpPost]
-    public async Task<ActionResult<ProgresoUsuarios>> Add(ProgresoUsuarios progreso)
+    public async Task<ActionResult<ProgresoUsuariosDto>> Add(ProgresoUsuariosDto progreso)
     {
         var newProgreso = await _service.Add(progreso);
         return CreatedAtAction(nameof(Get), new { id = newProgreso.ProgresoId }, newProgreso);
@@ -42,12 +39,9 @@ public class ProgresoUsuariosController(IUserService<ProgresoUsuarios> _service)
 
     // PUT: api/ProgresoUsuarios/ID
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, ProgresoUsuarios progreso)
+    public async Task<IActionResult> Update(int id, ProgresoUsuariosDto progreso)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        if (result != progreso.ProgresoId)
+        if (id != progreso.ProgresoId)
         {
             return BadRequest();
         }
@@ -57,11 +51,8 @@ public class ProgresoUsuariosController(IUserService<ProgresoUsuarios> _service)
 
     // DELETE: api/ProgresoUsuarios/ID
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
         var results = await _service.Delete(id);
         if (!results)
         {
