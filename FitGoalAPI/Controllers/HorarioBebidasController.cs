@@ -1,18 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shared.Models;
-using Shared.Abstractions;
 using FitGoalAPI.Authentication;
+using Abstractions;
+using Domain.DTO;
 
 namespace FitGoalAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
 [ServiceFilter(typeof(ApiKeyAuthFilter))]
-public class HorarioBebidasController(IUserService<HorarioBebidas> _service) : ControllerBase
+public class HorarioBebidasController(IHorarioBebidaService _service) : ControllerBase
 {
     // GET: api/HorarioBebidas/List/ID
     [HttpGet("List/{id}")]
-    public async Task<ActionResult<IEnumerable<HorarioBebidas>>> GetList(string id)
+    public async Task<ActionResult<IEnumerable<HorarioBebidasDto>>> GetList(string id)
     {
         var horarios = await _service.GetListByUID(id);
         return Ok(horarios);
@@ -20,11 +20,8 @@ public class HorarioBebidasController(IUserService<HorarioBebidas> _service) : C
 
     // GET: api/HorarioBebidas/ID
     [HttpGet("{id}")]
-    public async Task<ActionResult<HorarioBebidas>> Get(string id)
+    public async Task<ActionResult<HorarioBebidasDto>> Get(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
         var horario = await _service.Get(id);
 
         if (horario == null)
@@ -35,7 +32,7 @@ public class HorarioBebidasController(IUserService<HorarioBebidas> _service) : C
 
     // POST: api/HorarioBebidas
     [HttpPost]
-    public async Task<ActionResult<HorarioBebidas>> Add(HorarioBebidas horario)
+    public async Task<ActionResult<HorarioBebidasDto>> Add(HorarioBebidasDto horario)
     {
         var newHorario = await _service.Add(horario);
         return CreatedAtAction(nameof(Get), new { id = newHorario.HorarioBebidaId }, newHorario);
@@ -43,12 +40,9 @@ public class HorarioBebidasController(IUserService<HorarioBebidas> _service) : C
 
     // PUT: api/HorarioBebidas/ID
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update(string id, HorarioBebidas horario)
+    public async Task<IActionResult> Update(int id, HorarioBebidasDto horario)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        if (result != horario.HorarioBebidaId)
+        if (id != horario.HorarioBebidaId)
         {
             return BadRequest();
         }
@@ -59,13 +53,10 @@ public class HorarioBebidasController(IUserService<HorarioBebidas> _service) : C
 
     // DELETE: api/HorarioBebidas/ID
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(string id)
+    public async Task<IActionResult> Delete(int id)
     {
-        if (!int.TryParse(id, out int result))
-            return BadRequest("El ID proporcionado no es un número entero válido.");
-
-        var results = await _service.Delete(id);
-        if (!results)
+        var result = await _service.Delete(id);
+        if (!result)
         {
             return NotFound();
         }
@@ -73,4 +64,3 @@ public class HorarioBebidasController(IUserService<HorarioBebidas> _service) : C
         return NoContent();
     }
 }
-
