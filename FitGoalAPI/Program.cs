@@ -1,10 +1,7 @@
 using FitGoalAPI.Authentication;
-using FitGoalAPI.DAL;
-using FitGoalAPI.Service;
-using Microsoft.EntityFrameworkCore;
+using Service.DI;
+using Data.DI;
 using Microsoft.OpenApi.Models;
-using Shared.Abstractions;
-using Shared.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,18 +36,12 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityRequirement(requirement);
 });
 
-var ConStr = builder.Configuration.GetConnectionString("ConStr");
+var ConStr = builder.Configuration.GetConnectionString("SqlConStr");
 
-builder.Services.AddDbContext<Context>(options =>
-    options.UseMySql(ConStr, new MySqlServerVersion(new Version(8, 0, 30))));
+builder.Services.RegisterDbContext(ConStr!);
+builder.Services.RegisterServices();
 
-builder.Services.AddScoped<IUserService<Usuarios>, UsuariosService>();
-builder.Services.AddScoped<IUserService<Entrenamientos>, EntrenamientosService>();
-builder.Services.AddScoped<IUserService<ProgresoUsuarios>, ProgresoUsuariosService>();
-builder.Services.AddScoped<IUserService<Rutinas>, RutinasService>();
-builder.Services.AddScoped<IGenericService<Ejercicios>, EjerciciosService>();
-builder.Services.AddScoped<IGenericService<Tips>, TipsService>();
-builder.Services.AddScoped<IUserService<HorarioBebidas>, HorarioBebidasService>();
+builder.Configuration.AddEnvironmentVariables();
 
 builder.Services.AddScoped<ApiKeyAuthFilter>();
 
