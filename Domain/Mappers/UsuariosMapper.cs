@@ -17,6 +17,7 @@ public static class UsuariosMapper
             Altura = usuarios.Altura,
             PesoActual = usuarios.PesoActual,
             PesoIdeal = usuarios.PesoIdeal,
+            PesoInicial = usuarios.PesoInicial,
             AguaDiaria = usuarios.AguaDiaria
         };
     }
@@ -33,6 +34,7 @@ public static class UsuariosMapper
             Altura = usuariosDto.Altura,
             PesoActual = usuariosDto.PesoActual,
             PesoIdeal = usuariosDto.PesoIdeal,
+            PesoInicial = usuariosDto.PesoInicial,
             AguaDiaria = usuariosDto.AguaDiaria
         };
     }
