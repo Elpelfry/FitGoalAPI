@@ -38,6 +38,13 @@ public class EjerciciosController(IEjercicioService _service) : ControllerBase
         var newejercicio = await _service.Add(ejercicio);
         return CreatedAtAction(nameof(Get), new { id = newejercicio.EjercicioId }, newejercicio);
     }
+    
+    [HttpPost("batch")]
+    public async Task<ActionResult<List<EjerciciosDto>>> AddRange([FromBody] List<EjerciciosDto> ejercicios)
+    {
+        var newEjercicios = await _service.AddRange(ejercicios);
+        return Ok(newEjercicios);
+    }
 
     // PUT: api/Ejercicios/5
     [HttpPut("{id}")]

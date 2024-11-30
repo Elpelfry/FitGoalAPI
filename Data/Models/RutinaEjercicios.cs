@@ -13,5 +13,4 @@ public class RutinaEjercicios
     public int EjercicioId { get; set; }
     public int Repeticiones { get; set; }
     public int Series { get; set; }
-    public int Descanso { get; set; }
 }

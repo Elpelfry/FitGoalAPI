@@ -10,7 +10,6 @@ public static class ServicesRegister
     public static IServiceCollection RegisterServices(this IServiceCollection services)
     {
         services.AddScoped<IEjercicioService, EjerciciosService>();
-        services.AddScoped<IEntrenamientoService, EntrenamientosService>();
         services.AddScoped<IHorarioBebidaService, HorarioBebidasService>();
         services.AddScoped<IProgresoUsuarioService, ProgresoUsuariosService>();
         services.AddScoped<IRutinaService, RutinasService>();

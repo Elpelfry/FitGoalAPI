@@ -6,6 +6,6 @@ public class RutinasDto
     public string? UsuarioId { get; set; }
     public string? Nombre { get; set; }
     public string? Descripcion { get; set; }
-    public int DuracionTotal { get; set; }
+    public string? DuracionTotal { get; set; }
     public ICollection<RutinaEjerciciosDto> RutinaEjercicios { get; set; } = new List<RutinaEjerciciosDto>();
 }
