@@ -21,9 +21,10 @@ public class EntrenamientosService(FitGoalContext _context) : IEntrenamientoServ
 
     public async Task<EntrenamientosDto> Add(EntrenamientosDto entrenamiento)
     {
-        _context.Entrenamientos.Add(entrenamiento.ToModel());
+        var model = entrenamiento.ToModel();
+        _context.Entrenamientos.Add(model);
         await _context.SaveChangesAsync();
-        return entrenamiento;
+        return model.ToDto();
     }
 
     public async Task<bool> Update(EntrenamientosDto entrenamiento)

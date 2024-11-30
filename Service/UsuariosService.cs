@@ -15,9 +15,10 @@ public class UsuariosService(FitGoalContext _context) : IUsuarioService
 
     public async Task<UsuariosDto> Add(UsuariosDto usuario)
     {
-        _context.Usuarios.Add(usuario.ToModel());
+        var model = usuario.ToModel();
+        _context.Usuarios.Add(model);
         await _context.SaveChangesAsync();
-        return usuario;
+        return model.ToDto();
     }
 
     public async Task<bool> Update(UsuariosDto usuario)
