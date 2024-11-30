@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Data.Context;
 using Abstractions;
+using Data.Models;
 using Domain.DTO;
 using Domain.Mappers;
 
@@ -19,10 +20,11 @@ public class TipsService(FitGoalContext _context) : ITipService
     }
 
     public async Task<TipsDto> Add(TipsDto tip)
-    {
-        _context.Tips.Add(tip.ToModel());
+    { 
+        var model = tip.ToModel();
+        _context.Tips.Add(model);
         await _context.SaveChangesAsync();
-        return tip;
+        return model.ToDto();
     }
 
     public async Task<bool> Update(TipsDto tip)

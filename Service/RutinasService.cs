@@ -25,9 +25,10 @@ public class RutinasService(FitGoalContext _context) : IRutinaService
 
     public async Task<RutinasDto> Add(RutinasDto rutina)
     {
-        _context.Rutinas.Add(rutina.ToModel());
+        var model = rutina.ToModel();
+        _context.Rutinas.Add(model);
         await _context.SaveChangesAsync();
-        return rutina;
+        return model.ToDto();
     }
 
     public async Task<bool> Update(RutinasDto rutina)

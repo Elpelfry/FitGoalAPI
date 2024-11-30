@@ -21,9 +21,10 @@ public class HorarioBebidasService(FitGoalContext _context) : IHorarioBebidaServ
 
     public async Task<HorarioBebidasDto> Add(HorarioBebidasDto horario)
     {
-        _context.HorarioBebidas.Add(horario.ToModel());
+        var model = horario.ToModel();
+        _context.HorarioBebidas.Add(model);
         await _context.SaveChangesAsync();
-        return horario;
+        return model.ToDto();
     }
 
     public async Task<bool> Update(HorarioBebidasDto horario)

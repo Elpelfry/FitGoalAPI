@@ -21,9 +21,10 @@ public class ProgresoUsuariosService(FitGoalContext _context) : IProgresoUsuario
 
     public async Task<ProgresoUsuariosDto> Add(ProgresoUsuariosDto progreso)
     {
-        _context.ProgresoUsuarios.Add(progreso.ToModel());
+        var model = progreso.ToModel();
+        _context.ProgresoUsuarios.Add(model);
         await _context.SaveChangesAsync();
-        return progreso;
+        return model.ToDto();
     }
 
     public async Task<bool> Update(ProgresoUsuariosDto progreso)
