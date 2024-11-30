@@ -11,7 +11,7 @@ public class Rutinas
     public string? UsuarioId { get; set; }
     public string? Nombre { get; set; }
     public string? Descripcion { get; set; }
-    public int DuracionTotal { get; set; }
+    public string? DuracionTotal { get; set; }
     [ForeignKey("RutinaId")]
     public ICollection<RutinaEjercicios> RutinaEjercicios { get; set; } = new List<RutinaEjercicios>();
 }

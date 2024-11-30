@@ -12,6 +12,14 @@ public class EjerciciosService(FitGoalContext _context) : IEjercicioService
     {
         return await _context.Ejercicios.Select(e => e.ToDto()).ToListAsync();
     }
+    
+    public async Task<List<EjerciciosDto>> AddRange(List<EjerciciosDto> ejercicios)
+    {
+        var models = ejercicios.Select(e => e.ToModel()).ToList();
+        _context.Ejercicios.AddRange(models);
+        await _context.SaveChangesAsync();
+        return models.Select(m => m.ToDto()).ToList();
+    }
 
     public async Task<EjerciciosDto> Get(int id)
     {

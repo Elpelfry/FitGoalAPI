@@ -13,8 +13,7 @@ public static class RutinaEjerciciosMapper
             RutinaId = rutinaEjercicios.RutinaId,
             EjercicioId = rutinaEjercicios.EjercicioId,
             Repeticiones = rutinaEjercicios.Repeticiones,
-            Series = rutinaEjercicios.Series,
-            Descanso = rutinaEjercicios.Descanso
+            Series = rutinaEjercicios.Series
         };
     }
 
@@ -26,8 +25,7 @@ public static class RutinaEjerciciosMapper
             RutinaId = rutinaEjerciciosDto.RutinaId,
             EjercicioId = rutinaEjerciciosDto.EjercicioId,
             Repeticiones = rutinaEjerciciosDto.Repeticiones,
-            Series = rutinaEjerciciosDto.Series,
-            Descanso = rutinaEjerciciosDto.Descanso
+            Series = rutinaEjerciciosDto.Series
         };
     }
 }
