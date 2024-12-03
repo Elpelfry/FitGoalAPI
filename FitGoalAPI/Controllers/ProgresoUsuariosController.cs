@@ -60,4 +60,16 @@ public class ProgresoUsuariosController(IProgresoUsuarioService _service) : Cont
         }
         return NoContent();
     }
+    
+    // DELETE: api/ProgresoUsuarios/User/ID
+    [HttpDelete("User/{id}")]
+    public async Task<IActionResult> DeleteUserProgress(string id)
+    {
+        var results = await _service.DeleteUserProgress(id);
+        if (!results)
+        {
+            return NotFound();
+        }
+        return NoContent();
+    }
 }

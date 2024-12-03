@@ -43,4 +43,18 @@ public class ProgresoUsuariosService(FitGoalContext _context) : IProgresoUsuario
         _context.ProgresoUsuarios.Remove(progreso);
         return await _context.SaveChangesAsync() > 0;
     }
+    
+    public async Task<bool> DeleteUserProgress(string id)
+    {
+        var progresos = await _context.ProgresoUsuarios
+            .Where(p => p.UsuarioId == id).ToListAsync();
+        
+        if (progresos.Count == 0)
+        {
+            return false;
+        }
+        
+        _context.ProgresoUsuarios.RemoveRange(progresos);
+        return await _context.SaveChangesAsync() > 0;
+    }
 }
