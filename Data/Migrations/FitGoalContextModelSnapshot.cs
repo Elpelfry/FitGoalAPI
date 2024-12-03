@@ -77,22 +77,10 @@ namespace Data.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("ProgresoId"));
 
-                    b.Property<float>("Brazo")
-                        .HasColumnType("float");
-
-                    b.Property<float>("Cintura")
-                        .HasColumnType("float");
-
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<float>("Pecho")
-                        .HasColumnType("float");
-
                     b.Property<float>("Peso")
-                        .HasColumnType("float");
-
-                    b.Property<float>("Pierna")
                         .HasColumnType("float");
 
                     b.Property<string>("UsuarioId")

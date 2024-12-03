@@ -12,11 +12,7 @@ public static class ProgresoUsuariosMapper
             ProgresoId = progresoUsuarios.ProgresoId,
             UsuarioId = progresoUsuarios.UsuarioId,
             Fecha = progresoUsuarios.Fecha,
-            Peso = progresoUsuarios.Peso,
-            Brazo = progresoUsuarios.Brazo,
-            Pierna = progresoUsuarios.Pierna,
-            Pecho = progresoUsuarios.Pecho,
-            Cintura = progresoUsuarios.Cintura
+            Peso = progresoUsuarios.Peso
         };
     }
 
@@ -27,11 +23,7 @@ public static class ProgresoUsuariosMapper
             ProgresoId = progresoUsuariosDto.ProgresoId,
             UsuarioId = progresoUsuariosDto.UsuarioId,
             Fecha = progresoUsuariosDto.Fecha,
-            Peso = progresoUsuariosDto.Peso,
-            Brazo = progresoUsuariosDto.Brazo,
-            Pierna = progresoUsuariosDto.Pierna,
-            Pecho = progresoUsuariosDto.Pecho,
-            Cintura = progresoUsuariosDto.Cintura
+            Peso = progresoUsuariosDto.Peso
         };
     }
 }
